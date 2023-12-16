@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = {FilmDateValidator.class})
 public @interface FilmDate {
-    String message() default "Дата указана не верно";
+    String message() default "Дата фильма указана не верно";
 
     Class<?>[] groups() default {};
 

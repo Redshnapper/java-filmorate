@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = {UserDateValidator.class})
 public @interface UserDate {
-    String message() default "Дата указана не верно";
+    String message() default "Дата пользователя указана не верно";
 
     Class<?>[] groups() default {};
 

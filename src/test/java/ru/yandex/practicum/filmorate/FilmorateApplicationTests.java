@@ -1,8 +1,8 @@
 package ru.yandex.practicum.filmorate;
 
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class FilmorateApplicationTests {
     private Validator validator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
