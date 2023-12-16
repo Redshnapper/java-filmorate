@@ -23,7 +23,7 @@ public class FilmController {
     @PostMapping
     @Validated({Marker.OnCreate.class})
     public Film create(@Valid @RequestBody Film film) {
-        log.info("Создание пользователя {}", film);
+        log.info("Создание фильма {}", film);
         film.setId(idGenerator++);
         films.put(film.getId(), film);
         return film;

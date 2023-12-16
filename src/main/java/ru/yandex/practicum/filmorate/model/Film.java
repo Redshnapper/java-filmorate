@@ -23,7 +23,7 @@ public class Film {
     @NotNull
     @NotBlank
     private String name;
-    @Length(min = 1,max = 200)
+    @Length(min = 1, max = 200)
     private String description;
     @FilmDate
     private LocalDate releaseDate;
