@@ -75,7 +75,7 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public Set<User> getCommonFriends(Long id, Long otherId) {
+    public List<User> getCommonFriends(Long id, Long otherId) {
         Set<User> commonFriends = new HashSet<>();
         if (users.containsKey(id) && users.containsKey(otherId)) {
             if (!users.get(id).getFriends().isEmpty() && !users.get(otherId).getFriends().isEmpty()) {
@@ -86,10 +86,10 @@ public class InMemoryUserStorage implements UserStorage {
                 return users.get(otherId).getFriends().stream()
                         .map(users::get)
                         .filter(commonFriends::contains
-                        ).collect(Collectors.toSet());
+                        ).collect(Collectors.toList());
             }
         }
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 
 
