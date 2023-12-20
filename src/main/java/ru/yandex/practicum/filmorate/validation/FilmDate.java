@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.validators;
+package ru.yandex.practicum.filmorate.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,9 +10,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {UserDateValidator.class})
-public @interface UserDate {
-    String message() default "Дата пользователя указана не верно";
+@Constraint(validatedBy = {FilmDateValidator.class})
+public @interface FilmDate {
+    String message() default "Дата фильма указана не верно";
 
     Class<?>[] groups() default {};
 
