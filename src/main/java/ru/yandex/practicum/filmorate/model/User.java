@@ -17,7 +17,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private Set<Long> friends = new HashSet<>();
     @Null(groups = Marker.OnCreate.class)
     @NotNull(groups = Marker.OnUpdate.class)
     private Long id;
@@ -29,4 +28,5 @@ public class User {
     private String name;
     @UserDate
     private LocalDate birthday;
+    private Set<Long> friends = new HashSet<>();
 }

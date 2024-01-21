@@ -2,18 +2,26 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Genre;
+import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
+import ru.yandex.practicum.filmorate.storage.GenreStorage;
+import ru.yandex.practicum.filmorate.storage.MpaStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.List;
+import java.util.Set;
+
 
 @Service
 @RequiredArgsConstructor
 public class FilmService {
+
     private final FilmStorage filmStorage;
     private final UserStorage userStorage;
+    private final MpaStorage mpaStorage;
+    private final GenreStorage genreStorage;
 
     public Film createFilm(Film film) {
         return filmStorage.add(film);
@@ -32,20 +40,36 @@ public class FilmService {
     }
 
     public void userLikeFilm(Long id, Long userId) {
-        if (userStorage.getById(userId) == null) {
-            throw new UserNotFoundException(String.format("Пользователь с id %s не найден", userId));
-        }
+//        if (userStorage.getById(userId) == null) {
+//            throw new UserNotFoundException(String.format("Пользователь с id %s не найден", userId));
+//        }
         filmStorage.userLikeFilm(id, userId);
     }
 
     public void userDeleteLike(Long id, Long userId) {
-        if (userStorage.getById(userId) == null) {
-            throw new UserNotFoundException(String.format("Пользователь с id %s не найден", userId));
-        }
+//        if (userStorage.getById(userId) == null) {
+//            throw new UserNotFoundException(String.format("Пользователь с id %s не найден", userId));
+//        }
         filmStorage.userDeleteLike(id, userId);
     }
 
     public List<Film> getMostLiked(int count) {
         return filmStorage.getMostLiked(count);
+    }
+
+    public Mpa getMpaById(Long id) {
+        return mpaStorage.getMpaById(id);
+    }
+
+    public List<Mpa> getAllMpa() {
+        return mpaStorage.getAllMpa();
+    }
+
+    public Genre getGenreById(Long id) {
+        return genreStorage.getGenreById(id);
+    }
+
+    public Set<Genre> getAllGenres() {
+        return genreStorage.getAllGenres();
     }
 }
