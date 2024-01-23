@@ -116,7 +116,6 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         } catch (Exception e) {
             throw new FilmNotFoundException("Фильм не найден");
         }
-
     }
 
     @Override
@@ -134,13 +133,10 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
     @Override
     public List<Film> getMostLiked(int count) {
         List<Film> popularFilms = jdbcTemplate.query(
-                "SELECT * FROM films as f " +
-                        "JOIN (SELECT film_id, count(film_id) likes_amount" +
-                        "       FROM film_likes" +
-                        "       GROUP BY film_id" +
-                        " ) as a ON f.film_id = a.film_id " +
-                        "ORDER BY a.likes_amount " +
-                        "DESC LIMIT ?", filmRowMapper(), count
+                "select * from films as f " +
+                        "join (select film_id, count(film_id) likes_amount " +
+                        "from film_likes group by film_id" +
+                        ") as a ON f.film_id = a.film_id order by a.likes_amount desc limit ?", filmRowMapper(), count
         );
         if (popularFilms.isEmpty()) {
             return jdbcTemplate.query("select * from films", filmRowMapper());
@@ -280,7 +276,7 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         }
     }
 
-    public void test() {
-
-    }
+//    public void test() {
+//
+//    }
 }
