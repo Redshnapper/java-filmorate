@@ -29,13 +29,6 @@ public class ErrorHandler {
         );
     }
 
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public ErrorResponse handlePostNotFoundException(final FilmNotFoundException e) {
-//        return new ErrorResponse(
-//                e.getMessage()
-//        );
-//    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)

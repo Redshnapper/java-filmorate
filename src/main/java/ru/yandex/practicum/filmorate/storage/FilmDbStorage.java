@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.exception.UpdateUserException;
 import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
@@ -44,7 +45,6 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         } catch (Exception e) {
             return film;
         }
-
         return film;
     }
 
@@ -56,20 +56,20 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         Long id = film.getId();
         jdbcTemplate.update("delete from film_genres where film_id = ?", id);
         List<Genre> genres = new ArrayList<>(genresSorted);
-        jdbcTemplate.batchUpdate("insert into film_genres (film_id, genre_id) values (?,?)", new BatchPreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
-                Genre genre = genres.get(i);
-                ps.setLong(1, id);
-                ps.setLong(2, genre.getId());
-            }
+        jdbcTemplate.batchUpdate("insert into film_genres (film_id, genre_id) values (?,?)",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        Genre genre = genres.get(i);
+                        ps.setLong(1, id);
+                        ps.setLong(2, genre.getId());
+                    }
 
-            @Override
-            public int getBatchSize() {
-                return genresSorted.size();
-            }
-        });
-
+                    @Override
+                    public int getBatchSize() {
+                        return genresSorted.size();
+                    }
+                });
     }
 
     @Override
@@ -153,7 +153,6 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         } catch (Exception e) {
             throw new NotFoundException("Mpa c id %s не найден", id);
         }
-
     }
 
     @Override
