@@ -18,7 +18,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Film {
-    //Comparator<Genre> comparator = (o1, o2) -> o1.getId() - o2.getId();
     @Null(groups = Marker.OnCreate.class)
     @NotNull(groups = Marker.OnUpdate.class)
     private Long id;
@@ -33,5 +32,4 @@ public class Film {
     private Mpa mpa;
     private Set<Long> likes = new HashSet<>();
     private Set<Genre> genres = new LinkedHashSet<>();
-//    private List<Genre> genres = new ArrayList<>();
 }
