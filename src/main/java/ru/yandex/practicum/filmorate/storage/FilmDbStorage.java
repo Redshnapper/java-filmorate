@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.storage;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -14,6 +15,8 @@ import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.model.User;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 @Component
@@ -52,11 +55,20 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         film.setGenres(genresSorted);
         Long id = film.getId();
         jdbcTemplate.update("delete from film_genres where film_id = ?", id);
-        if (!genresSorted.isEmpty()) {
-            for (Genre genre : genresSorted) {
-                jdbcTemplate.update("insert into film_genres (film_id, genre_id) values (?,?)", id, genre.getId());
+        List<Genre> genres = new ArrayList<>(genresSorted);
+        jdbcTemplate.batchUpdate("insert into film_genres (film_id, genre_id) values (?,?)", new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                Genre genre = genres.get(i);
+                ps.setLong(1, id);
+                ps.setLong(2, genre.getId());
             }
-        }
+
+            @Override
+            public int getBatchSize() {
+                return genresSorted.size();
+            }
+        });
 
     }
 
@@ -266,5 +278,9 @@ public class FilmDbStorage implements FilmStorage, MpaStorage, GenreStorage {
         } catch (Exception e) {
             throw new UserNotFoundException("Пользователь не найден");
         }
+    }
+
+    public void test() {
+
     }
 }
