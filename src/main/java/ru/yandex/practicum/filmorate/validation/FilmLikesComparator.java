@@ -8,6 +8,7 @@ public class FilmLikesComparator implements Comparator<Film> {
 
     @Override
     public int compare(Film o1, Film o2) {
-        return o2.getLikes().size() - o1.getLikes().size();
+        //return o2.getLikes().size() - o1.getLikes().size();
+        return 1;
     }
 }

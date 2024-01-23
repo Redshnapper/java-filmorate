@@ -11,15 +11,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Film {
-    Set<Long> likes = new HashSet<>();
+    //Comparator<Genre> comparator = (o1, o2) -> o1.getId() - o2.getId();
     @Null(groups = Marker.OnCreate.class)
     @NotNull(groups = Marker.OnUpdate.class)
     private Long id;
@@ -31,4 +30,8 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private int duration;
+    private Mpa mpa;
+    private Set<Long> likes = new HashSet<>();
+    private Set<Genre> genres = new LinkedHashSet<>();
+//    private List<Genre> genres = new ArrayList<>();
 }

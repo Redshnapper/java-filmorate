@@ -27,7 +27,7 @@ public class UserController {
 
     @PutMapping
     @Validated(Marker.OnUpdate.class)
-    public User updateUser(@RequestBody User user) {
+    public User updateUser(@Valid @RequestBody User user) {
         log.info("Обновление пользователя {}", user);
         return userService.updateUser(user);
     }
