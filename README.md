@@ -1,5 +1,5 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=java-filmorate)](https://git.io/typing-svg)  
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Lora&weight=100&size=18&pause=1000&color=A5FFB6CF&repeat=false&random=false&width=435&lines=Template+repository+for+Filmorate+project.+)](https://git.io/typing-svg)  
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1000&color=F79C38&random=false&width=435&lines=Template%2Brepository%2Bfor%2BFilmorate%2Bproject.)](https://git.io/typing-svg)  
 ## Это репозиторий проекта "Filmorate"  
 
 ------
